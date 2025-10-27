@@ -1,15 +1,20 @@
 import java.util.Scanner;
 
 /**
- * Kelas TemperatureConverter digunakan untuk mengonversi suhu dari Celsius ke Fahrenheit.
- * Program ini meminta pengguna memasukkan suhu dalam Celsius dan menampilkan hasil konversinya.
+ * Kelas {@code TemperatureConverter} digunakan untuk melakukan konversi suhu antara
+ * Celsius dan Fahrenheit.
  *
- * <p>Contoh:
- * Jika pengguna memasukkan 25, maka hasilnya adalah 77°F.</p>
+ * <p>Program ini dapat:
+ * <ul>
+ *     <li>Mengonversi suhu dari Celsius ke Fahrenheit</li>
+ *     <li>Mengonversi suhu dari Fahrenheit ke Celsius</li>
+ * </ul>
+ *
+ * <p>Pengguna dapat memilih jenis konversi melalui menu interaktif di terminal.</p>
  *
  * @author Grenda
- * @version 1.1
- * @since 2025-10-25
+ * @version 2.0
+ * @since 2025-10-26
  */
 public class TemperatureConverter {
 
@@ -19,17 +24,33 @@ public class TemperatureConverter {
     /**
      * Method utama untuk menjalankan program konversi suhu.
      *
+     * <p>Program ini akan menampilkan menu pilihan untuk melakukan konversi suhu
+     * dari Celsius ke Fahrenheit atau sebaliknya.</p>
+     *
      * @param args argumen dari command line (tidak digunakan di sini).
      */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Masukkan suhu dalam Celsius: ");
-        double celsius = input.nextDouble();
+        System.out.println("=== KONVERSI SUHU ===");
+        System.out.println("1. Celsius ke Fahrenheit");
+        System.out.println("2. Fahrenheit ke Celsius");
+        System.out.print("Pilih jenis konversi (1/2): ");
+        int pilihan = input.nextInt();
 
-        double fahrenheit = toFahrenheit(celsius);
-
-        System.out.println("Suhu dalam Fahrenheit: " + fahrenheit);
+        if (pilihan == 1) {
+            System.out.print("Masukkan suhu dalam Celsius: ");
+            double celsius = input.nextDouble();
+            double fahrenheit = toFahrenheit(celsius);
+            System.out.println("Hasil: " + fahrenheit + "°F");
+        } else if (pilihan == 2) {
+            System.out.print("Masukkan suhu dalam Fahrenheit: ");
+            double fahrenheit = input.nextDouble();
+            double celsius = toCelsius(fahrenheit);
+            System.out.println("Hasil: " + celsius + "°C");
+        } else {
+            System.out.println("Pilihan tidak valid.");
+        }
 
         input.close();
     }
@@ -37,11 +58,31 @@ public class TemperatureConverter {
     /**
      * Mengonversi suhu dari Celsius ke Fahrenheit.
      *
+     * <p>Rumus:</p>
+     * <pre>
+     * Fahrenheit = (Celsius × 9 / 5) + 32
+     * </pre>
+     *
      * @param celsius nilai suhu dalam derajat Celsius.
-     * @return nilai suhu yang sudah dikonversi ke Fahrenheit.
+     * @return hasil konversi dalam derajat Fahrenheit.
      */
     public static double toFahrenheit(double celsius) {
         return (celsius * 9 / 5) + 32;
+    }
+//1
+    /**
+     * Mengonversi suhu dari Fahrenheit ke Celsius.
+     *
+     * <p>Rumus:</p>
+     * <pre>
+     * Celsius = (Fahrenheit - 32) × 5 / 9
+     * </pre>
+     *
+     * @param fahrenheit nilai suhu dalam derajat Fahrenheit.
+     * @return hasil konversi dalam derajat Celsius.
+     */
+    public static double toCelsius(double fahrenheit) {
+        return (fahrenheit - 32) * 5 / 9;
     }
 
     /**
